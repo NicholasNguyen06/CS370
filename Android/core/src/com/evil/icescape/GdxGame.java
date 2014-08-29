@@ -21,7 +21,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class GdxGame extends ApplicationAdapter {
-	private Pixmap iciclePixMap;
 	private Pixmap playerPixMap;
 	private Texture icicleTex;
 	private Texture playerTex;
@@ -60,19 +59,12 @@ public class GdxGame extends ApplicationAdapter {
 		screenWidth  = Gdx.graphics.getWidth();
 		screenHeight = Gdx.graphics.getHeight();
 		
-		iciclePixMap   = new Pixmap(16, 16, Pixmap.Format.RGBA8888);
 		playerPixMap = new Pixmap(64, 64, Pixmap.Format.RGBA8888);
-		
-		iciclePixMap.setColor(Color.BLUE);
-		iciclePixMap.fill();
-		
 		playerPixMap.setColor(Color.GRAY);
 		playerPixMap.fill();
 
-		icicleTex = new Texture(iciclePixMap);
 		playerTex = new Texture(playerPixMap);
-		
-		iciclePixMap.dispose();
+		icicleTex = new Texture(Gdx.files.internal("img/icicle.png"));
 		playerPixMap.dispose();
 		
 		camera = new OrthographicCamera();
