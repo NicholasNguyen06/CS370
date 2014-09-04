@@ -3,46 +3,41 @@ package com.icescape.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.graphics.Texture;
 
-public class Player {
+public class Player extends GameObject {
 
-	public int width = 100, height = 100;
-	public Texture image;
+	// Width and height of all player objects
+	// Currently, player is just a rectangle.
+	// Down the road, it could probably be represented with 
+	// a circle and a rectangle
+	public static int width = 100, height = 100;
+
+	// Rate of constant leftward acceleration
+	private final float LEFT_ACCELERATION = -400.0f;
 	
+	// Speed to add to player's velocity when screen is tapped
+	private float moveSpeed = 150.0f;
+	
+	// Bounding box for collisions
 	private Rectangle rect;
-	private Vector2 position, acceleration, velocity;
 	
-	public Player(int posX, int posY) {
+	public Player(float posX, float posY) {
 		position = new Vector2(posX, posY);
 		velocity = new Vector2(0, 0);
-		acceleration = new Vector2(-400, 0);
+		acceleration = new Vector2(LEFT_ACCELERATION, 0);
 		
 		rect = new Rectangle(posX, posY, width, height);
-		
-		image = new Texture(Gdx.files.internal("img/cropped_player.png"));
 	}
 	
+	@Override
 	public void update(float delta) {
-		position.add(velocity.cpy().scl(delta));
-		velocity.add(acceleration.cpy().scl(delta));
-		
+		super.update(delta);
 		fixPositionIfNeeded();
-
-		
-		//Gdx.app.log("acceleration", acceleration.x + "");
 	}
 	
-	public void accelerateRight() {
+	// Move the player right, on screen tap
+	public void moveRight() {
 		velocity.add(150.0f, 0.0f);
-	}
-	
-	public float getX() {
-		return position.x;
-	}
-	
-	public float getY() {
-		return position.y;
 	}
 	
 	public Rectangle getRect() {
@@ -51,6 +46,15 @@ public class Player {
 		return rect;
 	}
 	
+	public float getMoveSpeed() {
+		return moveSpeed;
+	}
+	
+	public void setMoveSpeed(float newSpeed) {
+		moveSpeed = newSpeed;
+	}
+	
+	// Fix player's position if it moves off the screen
 	private void fixPositionIfNeeded() {
 		if (position.x < 0) {
 			position.x = 0;
@@ -70,4 +74,5 @@ public class Player {
 	private boolean isMovingLeft() {
 		return velocity.x < 0;
 	}
+	
 }

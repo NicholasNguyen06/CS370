@@ -1,3 +1,8 @@
+/*
+ * GameScreen implements libgdx's Screen interface. It contains everything necessary to play the game,
+ * a GameRenderer and a GameWorld.
+ */
+
 package com.icescape.game;
 
 import com.badlogic.gdx.Gdx;
@@ -11,16 +16,21 @@ public class GameScreen implements Screen {
 
 	private GameRenderer renderer;
 	private GameWorld world;
+	private float runtime;
 	
 	public GameScreen() {
 		world = new GameWorld();
 		renderer = new GameRenderer(world);
+		
+		runtime = 0;
 	}
 	
 	@Override
 	public void render(float delta) {
+		runtime += delta;
+		
 		world.update(delta);
-		renderer.render();
+		renderer.render(runtime);
 	}
 
 	@Override

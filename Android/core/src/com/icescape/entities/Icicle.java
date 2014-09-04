@@ -3,38 +3,35 @@ package com.icescape.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.graphics.Texture;
 
-public class Icicle {
 
+public class Icicle extends GameObject {
+
+	// Width and height of all icicle objects
+	// Currently, icicles are rectangles for collisions,
+	// we will need to create a Triangle class to represent them more accurately.
 	public static int width = 64, height = 64;
-	public Texture image;
 	
+	// Rate of falling acceleration
+	private static int GRAV_ACCELERATION = -120;
+	
+	// Bounding box for collisions
 	private Rectangle rect;
-	private Vector2 position, acceleration, velocity;
 	
+	// Initialize an icicle at (posX, posY)
 	public Icicle(int posX, int posY) {
 		position = new Vector2(posX, posY);
-		velocity = new Vector2(0, -1);
-		acceleration = new Vector2(0, -120);
+		velocity = new Vector2(0, 0);
+		acceleration = new Vector2(0, GRAV_ACCELERATION);
 		
 		rect = new Rectangle(posX, posY, width, height);
-		image = new Texture(Gdx.files.internal("img/icicle.png"));
 		
-		Gdx.app.log("Icicle", "constructed a new icicle with origin at: " + posX + ", " + posY);
+		//Gdx.app.log("Icicle", "constructed a new icicle with origin at: " + posX + ", " + posY);
 	}
 	
+	@Override
 	public void update(float delta) {
-		position.add(velocity.cpy().scl(delta));
-		velocity.add(acceleration.cpy().scl(delta));	
-	}
-
-	public float getX() {
-		return position.x;
-	}
-	
-	public float getY() {
-		return position.y;
+		super.update(delta);
 	}
 	
 	public Rectangle getRect() {
@@ -42,6 +39,4 @@ public class Icicle {
 		rect.y = position.y;
 		return rect;
 	}
-	
-	
 }
