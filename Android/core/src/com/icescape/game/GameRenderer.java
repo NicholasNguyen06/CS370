@@ -56,7 +56,7 @@ public class GameRenderer {
 	
 	private void drawPlayer() {
 		batch.begin();
-		batch.draw(AssetLoader.player, world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
+		batch.draw(world.getPlayer().getCurrentFrame(), world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
 		batch.end();
 	}
 	

@@ -3,6 +3,8 @@ package com.icescape.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.icescape.helpers.AssetLoader;
 
 public class Player extends GameObject {
 
@@ -21,6 +23,11 @@ public class Player extends GameObject {
 	// Bounding box for collisions
 	private Rectangle rect;
 	
+	// Current frame of animation
+	private int currentFrame = 1;
+	private boolean isAnimating = false;
+	private boolean getNextFrame = false;
+	
 	public Player(float posX, float posY) {
 		position = new Vector2(posX, posY);
 		velocity = new Vector2(0, 0);
@@ -33,17 +40,38 @@ public class Player extends GameObject {
 	public void update(float delta) {
 		super.update(delta);
 		fixPositionIfNeeded();
+		
+		if (isAnimating && getNextFrame) {
+			if (++currentFrame > 8) {
+				currentFrame = 1;
+				isAnimating = false;
+			}
+			getNextFrame = false;
+			
+		} else if (isAnimating && !getNextFrame) {
+			getNextFrame = true;
+		}
 	}
 	
 	// Move the player right, on screen tap
 	public void moveRight() {
 		velocity.add(150.0f, 0.0f);
+		isAnimating = true;
 	}
 	
 	public Rectangle getRect() {
 		rect.x = position.x;
 		rect.y = position.y;
 		return rect;
+	}
+	
+	public Sprite getCurrentFrame() {
+		if (isAnimating == true) {
+			Gdx.app.log("currentFrame", currentFrame + "");
+			return AssetLoader.playerMoveRight.createSprite("000" + currentFrame);
+		} else {
+			return AssetLoader.player;
+		}
 	}
 	
 	public float getMoveSpeed() {

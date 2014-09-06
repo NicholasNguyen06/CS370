@@ -29,6 +29,10 @@ public class GameWorld {
 	private long lastIcicleTime;
 
 	private long icicle_spawn_spacing = 500000000;
+	
+	private int iciclesDodged = 0;
+	
+	private boolean gameOver = false;
 
 	public GameWorld() {
 		player = new Player(0, Constants.BACKGROUND_LAKE_HEIGHT);
@@ -63,6 +67,10 @@ public class GameWorld {
 		return icicles;
 	}
 
+	public boolean gameIsOver() {
+		return gameOver;
+	}
+	
 	private void updateIcicles(float delta) {
 		Iterator<Icicle> iter = icicles.iterator();
 		while (iter.hasNext()) {
@@ -72,11 +80,13 @@ public class GameWorld {
 			// If icicle has touched the top of the lake
 			if (icicle.getY() <= Constants.BACKGROUND_LAKE_HEIGHT) {
 				iter.remove();
+				++iciclesDodged;
 			}
 
 			// Icicle has collided with player
 			else if (icicle.getRect().overlaps(player.getRect())) {
 				iter.remove();
+				gameOver = true;
 			}
 		}
 	}
