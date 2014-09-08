@@ -3,17 +3,10 @@
 
 ##Backlog
 
-1. Graphics Research
- * AndEngine
- * Android NDK
- * Libgdx
- * Unity
- * Project Anarchy
- * Cocos2d
- * OpenGL
-2. Complete Android [tutorials](http://developer.android.com/training/basics/firstapp/index.html)
-3. Create app map (Wednesday meeting)
-4. Create project structure (folder hierarchies, etc.)
+~~1. Graphics Research~~
+~~2. Complete Android [tutorials](http://developer.android.com/training/basics/firstapp/index.html)~~
+~~3. Create app map (Wednesday meeting)~~
+~~4. Create project structure (folder hierarchies, etc.)~~
 5. Implement Game
   * Game logic
      * Falling objects
