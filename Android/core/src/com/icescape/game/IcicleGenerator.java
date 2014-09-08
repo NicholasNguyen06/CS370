@@ -10,19 +10,18 @@
 
 package com.icescape.game;
 import com.icescape.entities.Icicle;
+import com.icescape.helpers.Constants;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 
-public class IcicleFactory {
+public class IcicleGenerator {
 	
-	public IcicleFactory() {
-		// nothing needed, for now
-	}
-	
-	public Icicle spawnIcicle() {
+	public static Icicle spawnIcicle() {
 
 		// Create a new icicle, positioned somewhere between (0, screen_height) and (screen_width, screen_height)
-		return new Icicle(MathUtils.random(0, Gdx.graphics.getWidth() - Icicle.width), Gdx.graphics.getHeight() - Icicle.height);
+		int x = MathUtils.random(0, (int)Constants.SCREEN_WIDTH - Icicle.width);
+		int y = (int)Constants.SCREEN_HEIGHT - Icicle.height;
+		return new Icicle(x, y);
 	}
 }

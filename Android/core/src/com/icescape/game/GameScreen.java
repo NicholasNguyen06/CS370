@@ -25,6 +25,10 @@ public class GameScreen implements Screen {
 		runtime = 0;
 	}
 	
+	public boolean gameIsOver() {
+		return world.gameIsOver();
+	}
+	
 	@Override
 	public void render(float delta) {
 		runtime += delta;
