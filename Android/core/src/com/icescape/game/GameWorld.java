@@ -28,7 +28,7 @@ public class GameWorld {
 	
 	private Array<Snowball> snowballs;
 	private long lastSnowballTime;
-	private long snowballSpawnSpacing = 850000000;
+	private long snowballSpawnSpacing = 999999999;
 
 	private Array<Icicle> icicles;
 	private long lastIcicleTime;
@@ -57,6 +57,7 @@ public class GameWorld {
 		// Throw a new snowball if necessary
 		if (TimeUtils.nanoTime() - lastSnowballTime > snowballSpawnSpacing) {
 			snowballs.add(SnowballGenerator.spawnSnowball());
+			lastSnowballTime = TimeUtils.nanoTime();
 		}
 		
 		// If the screen was tapped, update the player
@@ -83,6 +84,10 @@ public class GameWorld {
 	
 	public Array<Snowball> getSnowballs() {
 		return snowballs;
+	}
+	
+	public int getIciclesDodged() {
+		return iciclesDodged;
 	}
 
 	private void updateIcicles(float delta) {

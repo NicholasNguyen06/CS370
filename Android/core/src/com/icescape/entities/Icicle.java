@@ -32,11 +32,11 @@ public class Icicle extends GameObject {
 	@Override
 	public void update(float delta) {
 		super.update(delta);
+		rect.x = position.x;
+		rect.y = position.y;
 	}
 	
 	public Rectangle getRect() {
-		rect.x = position.x;
-		rect.y = position.y;
 		return rect;
 	}
 }

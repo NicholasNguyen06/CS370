@@ -32,6 +32,8 @@ public class Player extends GameObject {
 	@Override
 	public void update(float delta) {
 		super.update(delta);
+		rect.x = position.x;
+		rect.y = position.y;
 		fixPositionIfNeeded();
 	}
 	
@@ -41,8 +43,6 @@ public class Player extends GameObject {
 	}
 	
 	public Rectangle getRect() {
-		rect.x = position.x;
-		rect.y = position.y;
 		return rect;
 	}
 	

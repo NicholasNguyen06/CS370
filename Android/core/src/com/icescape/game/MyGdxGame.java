@@ -22,16 +22,17 @@ public class MyGdxGame extends Game {
 	public void create() {
 		gameScreen = new GameScreen();
 		AssetLoader.load();
+		startGame();
+	}
+	
+	public void startGame() {
+		gameScreen.dispose();
+		gameScreen = new GameScreen();
 		setScreen(gameScreen);
-		
 	}
 	
 	@Override
 	public void render() {
-		if (gameScreen.gameIsOver() == false) {
-			super.render();
-		} else {
-			pause();
-		}
+		super.render();
 	}	
 }

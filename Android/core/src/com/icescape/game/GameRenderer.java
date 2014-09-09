@@ -16,12 +16,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 import com.icescape.entities.Icicle;
 import com.icescape.entities.Player;
 import com.icescape.entities.Snowball;
 import com.icescape.helpers.AssetLoader;
 import com.icescape.helpers.Constants;
+import com.icescape.helpers.InputManager;
 
 public class GameRenderer {
 
@@ -29,6 +31,9 @@ public class GameRenderer {
 	private SpriteBatch batch;
 	private GameWorld world;
 	private ShapeRenderer shapeRenderer;
+	
+	private InputManager input;
+	private BitmapFont font;
 	
 	public GameRenderer(GameWorld world) {
 		this.world = world;
@@ -38,6 +43,8 @@ public class GameRenderer {
 		
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
+		input = new InputManager();
+		font = new BitmapFont();
 	}
 	
 	public void render(float runtime) {
@@ -48,6 +55,14 @@ public class GameRenderer {
 		drawPlayer();
 		drawIcicles();
 		drawSnowballs();
+		drawText();
+	}
+	
+	private void drawText() {
+		batch.begin();
+		font.drawMultiLine(batch,  input.getDeviceRotation(), 10, 500);
+		font.draw(batch, "" + world.getIciclesDodged(), 10, 300);
+		batch.end();
 	}
 	
 	private void drawBackground(float runtime) {
@@ -77,7 +92,7 @@ public class GameRenderer {
 	
 	private void drawSnowballs() {
 		shapeRenderer.begin(ShapeType.Filled);
-		shapeRenderer.setColor(255, 0, 0, 1);
+		shapeRenderer.setColor(0, 0, 0, 1);
 		Iterator<Snowball> iter = world.getSnowballs().iterator();
 		while (iter.hasNext()) {
 			Snowball snowball = iter.next();
