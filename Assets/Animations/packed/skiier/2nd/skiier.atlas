@@ -1,0 +1,72 @@
+
+skiier.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+eskimo5
+  rotate: false
+  xy: 1, 1
+  size: 839, 799
+  orig: 839, 799
+  offset: 0, 0
+  index: -1
+
+skiier2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+eskimo6
+  rotate: false
+  xy: 1, 1
+  size: 749, 799
+  orig: 749, 799
+  offset: 0, 0
+  index: -1
+
+skiier3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+eskimo4
+  rotate: false
+  xy: 1, 1
+  size: 737, 799
+  orig: 737, 799
+  offset: 0, 0
+  index: -1
+
+skiier4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+eskimo3
+  rotate: false
+  xy: 1, 1
+  size: 569, 853
+  orig: 569, 853
+  offset: 0, 0
+  index: -1
+
+skiier5.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+eskimo2
+  rotate: false
+  xy: 1, 1
+  size: 569, 829
+  orig: 569, 829
+  offset: 0, 0
+  index: -1
+
+skiier6.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+eskimo1
+  rotate: false
+  xy: 1, 1
+  size: 569, 799
+  orig: 569, 799
+  offset: 0, 0
+  index: -1

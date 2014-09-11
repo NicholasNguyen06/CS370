@@ -42,7 +42,7 @@ public class Player extends GameObject {
 		fixPositionIfNeeded();
 		
 		if (isAnimating && getNextFrame) {
-			if (++currentFrame > 8) {
+			if (++currentFrame > 6) {
 				currentFrame = 1;
 				isAnimating = false;
 			}
@@ -68,9 +68,9 @@ public class Player extends GameObject {
 	public Sprite getCurrentFrame() {
 		if (isAnimating == true) {
 			Gdx.app.log("currentFrame", currentFrame + "");
-			return AssetLoader.playerMoveRight.createSprite("000" + currentFrame);
+			return AssetLoader.playerMoveRight.createSprite("eskimo" + currentFrame);
 		} else {
-			return AssetLoader.player;
+			return AssetLoader.playerMoveRight.createSprite("eskimo1");
 		}
 	}
 	
