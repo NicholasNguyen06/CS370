@@ -20,36 +20,47 @@ import com.icescape.helpers.Constants;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.math.Intersector;
 
 public class GameWorld {
 
 	private Player player;
-	private IcicleFactory icicleFactory;
+	
+	private Array<Snowball> snowballs;
+	private long lastSnowballTime;
+	private long snowballSpawnSpacing = 999999999;
+
 	private Array<Icicle> icicles;
 	private long lastIcicleTime;
+	private long icicleSpawnSpacing = 500000000;
 
-	private long icicle_spawn_spacing = 500000000;
-	
 	private int iciclesDodged = 0;
 	
 	private boolean gameOver = false;
 
 	public GameWorld() {
 		player = new Player(0, Constants.BACKGROUND_LAKE_HEIGHT);
-		icicleFactory = new IcicleFactory();
+		
 		icicles = new Array<Icicle>();
+		snowballs = new Array<Snowball>();
 
-		lastIcicleTime = TimeUtils.nanoTime();
+		lastIcicleTime = lastSnowballTime = TimeUtils.nanoTime();
 	}
 
 	public void update(float delta) {
 
 		// Generate a new icicle if necessary
-		if (TimeUtils.nanoTime() - lastIcicleTime > icicle_spawn_spacing) {
-			icicles.add(icicleFactory.spawnIcicle());
+		if (TimeUtils.nanoTime() - lastIcicleTime > icicleSpawnSpacing) {
+			icicles.add(IcicleGenerator.spawnIcicle());
 			lastIcicleTime = TimeUtils.nanoTime();
 		}
 
+		// Throw a new snowball if necessary
+		if (TimeUtils.nanoTime() - lastSnowballTime > snowballSpawnSpacing) {
+			snowballs.add(SnowballGenerator.spawnSnowball());
+			lastSnowballTime = TimeUtils.nanoTime();
+		}
+		
 		// If the screen was tapped, update the player
 		if (Gdx.input.justTouched()) {
 			player.moveRight();
@@ -57,6 +68,11 @@ public class GameWorld {
 
 		player.update(delta);
 		updateIcicles(delta);
+		updateSnowballs(delta);
+	}
+	
+	public boolean gameIsOver() {
+		return gameOver;
 	}
 
 	public Player getPlayer() {
@@ -66,9 +82,13 @@ public class GameWorld {
 	public Array<Icicle> getIcicles() {
 		return icicles;
 	}
-
-	public boolean gameIsOver() {
-		return gameOver;
+	
+	public Array<Snowball> getSnowballs() {
+		return snowballs;
+	}
+	
+	public int getIciclesDodged() {
+		return iciclesDodged;
 	}
 	
 	private void updateIcicles(float delta) {
@@ -87,6 +107,23 @@ public class GameWorld {
 			else if (icicle.getRect().overlaps(player.getRect())) {
 				iter.remove();
 				gameOver = true;
+			}
+		}
+	}
+	
+	private void updateSnowballs(float delta) {
+		Iterator<Snowball> iter = snowballs.iterator();
+		while (iter.hasNext()) {
+			Snowball snowball = iter.next();
+			snowball.update(delta);
+			
+			// If snowball has touched the top of the lake
+			if (snowball.getY() <= Constants.BACKGROUND_LAKE_HEIGHT) {
+				iter.remove();
+			}
+			
+			else if ( Intersector.overlaps(snowball.getBoundingCircle(), player.getRect()) ) {
+				iter.remove();
 			}
 		}
 	}

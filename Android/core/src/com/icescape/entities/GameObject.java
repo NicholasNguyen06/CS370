@@ -4,9 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public abstract class GameObject {
 
-	protected Vector2 position; 
-	protected Vector2 acceleration;
-	protected Vector2 velocity;
+	protected Vector2 position, acceleration, velocity;
 
 	// update() will be called by all subclasses of GameObject
 	public void update(float delta) {

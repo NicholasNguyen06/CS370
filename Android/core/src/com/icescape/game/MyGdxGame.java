@@ -14,13 +14,25 @@ import com.icescape.helpers.AssetLoader;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
-
 public class MyGdxGame extends Game {
 
+	private GameScreen gameScreen;
+	
 	@Override
 	public void create() {
+		gameScreen = new GameScreen();
 		AssetLoader.load();
-		setScreen(new GameScreen());
+		startGame();
 	}
 	
+	public void startGame() {
+		gameScreen.dispose();
+		gameScreen = new GameScreen();
+		setScreen(gameScreen);
+	}
+	
+	@Override
+	public void render() {
+		super.render();
+	}	
 }

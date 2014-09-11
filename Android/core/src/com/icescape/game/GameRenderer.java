@@ -7,25 +7,33 @@
 
 package com.icescape.game;
 
-import com.icescape.entities.Icicle;
-import com.icescape.entities.Player;
-
-import com.icescape.helpers.AssetLoader;
-import com.icescape.helpers.Constants;
-
 import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Logger;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+
+import com.icescape.entities.Icicle;
+import com.icescape.entities.Player;
+import com.icescape.entities.Snowball;
+import com.icescape.helpers.AssetLoader;
+import com.icescape.helpers.Constants;
+import com.icescape.helpers.InputManager;
 
 public class GameRenderer {
 
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private GameWorld world;
+	private ShapeRenderer shapeRenderer;
+	
+	private InputManager input;
+	private BitmapFont font;
 	
 	public GameRenderer(GameWorld world) {
 		this.world = world;
@@ -33,7 +41,10 @@ public class GameRenderer {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
 		
-		batch = new SpriteBatch();		
+		batch = new SpriteBatch();
+		shapeRenderer = new ShapeRenderer();
+		input = new InputManager();
+		font = new BitmapFont();
 	}
 	
 	public void render(float runtime) {
@@ -43,6 +54,15 @@ public class GameRenderer {
 		drawBackground(runtime);
 		drawPlayer();
 		drawIcicles();
+		drawSnowballs();
+		drawText();
+	}
+	
+	private void drawText() {
+		batch.begin();
+		font.drawMultiLine(batch,  input.getDeviceRotation(), 10, 500);
+		font.draw(batch, "" + world.getIciclesDodged(), 10, 300);
+		batch.end();
 	}
 	
 	private void drawBackground(float runtime) {
@@ -68,5 +88,16 @@ public class GameRenderer {
 			batch.draw(AssetLoader.icicle, icicle.getX(), icicle.getY(), Icicle.width, Icicle.height);
 		}
 		batch.end();
+	}
+	
+	private void drawSnowballs() {
+		shapeRenderer.begin(ShapeType.Filled);
+		shapeRenderer.setColor(0, 0, 0, 1);
+		Iterator<Snowball> iter = world.getSnowballs().iterator();
+		while (iter.hasNext()) {
+			Snowball snowball = iter.next();
+			shapeRenderer.circle(snowball.getX(), snowball.getY(), Snowball.radius);
+		}
+		shapeRenderer.end();
 	}
 }
