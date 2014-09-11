@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class AssetLoader {
 	
 	public static TextureAtlas playerMoveRight;
-	private static String player_textureatlas_name = "anim/skiier/skiier_animation.atlas";
+	private static String player_textureatlas_name = "anim/skiier/skiier.atlas";
 	
 	public static Sprite player;
 	private static String player_texture_name = "img/cropped_player.png";
