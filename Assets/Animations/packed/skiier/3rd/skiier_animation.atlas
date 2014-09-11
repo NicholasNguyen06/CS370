@@ -1,0 +1,52 @@
+
+skiier_animation.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+eskimo1
+  rotate: false
+  xy: 1, 387
+  size: 384, 384
+  orig: 384, 384
+  offset: 0, 0
+  index: -1
+eskimo2
+  rotate: false
+  xy: 1, 1
+  size: 384, 384
+  orig: 384, 384
+  offset: 0, 0
+  index: -1
+eskimo3
+  rotate: false
+  xy: 387, 387
+  size: 384, 384
+  orig: 384, 384
+  offset: 0, 0
+  index: -1
+eskimo4
+  rotate: false
+  xy: 387, 1
+  size: 384, 384
+  orig: 384, 384
+  offset: 0, 0
+  index: -1
+
+skiier_animation2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+eskimo5
+  rotate: false
+  xy: 1, 1
+  size: 384, 384
+  orig: 384, 384
+  offset: 0, 0
+  index: -1
+eskimo6
+  rotate: false
+  xy: 387, 1
+  size: 384, 384
+  orig: 384, 384
+  offset: 0, 0
+  index: -1
