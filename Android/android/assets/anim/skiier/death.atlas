@@ -1,0 +1,336 @@
+
+death.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death1
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death10
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death11
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death12
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death5.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death13
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death6.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death14
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death7.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death15
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death8.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death16
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death9.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death17
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death10.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death18
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death11.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death19
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death12.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death2
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death13.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death20
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death14.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death21
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death15.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death22
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death16.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death23
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death17.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death24
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death18.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death25
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death19.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death26
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death20.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death27
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death21.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death28
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death22.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death3
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death23.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death4
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death24.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death5
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death25.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death6
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death26.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death7
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death27.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death8
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+death28.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+death9
+  rotate: false
+  xy: 1, 1
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1

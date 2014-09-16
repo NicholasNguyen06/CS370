@@ -48,7 +48,7 @@ public class GameWorld {
 	}
 
 	public void update(float delta) {
-
+		
 		// Generate a new icicle if necessary
 		if (TimeUtils.nanoTime() - lastIcicleTime > icicleSpawnSpacing) {
 			icicles.add(IcicleGenerator.spawnIcicle());
@@ -67,6 +67,9 @@ public class GameWorld {
 		}
 
 		player.update(delta);
+		if (player.isAlive == false) {
+			Gdx.app.exit();
+		}
 		updateIcicles(delta);
 		updateSnowballs(delta);
 	}
@@ -106,6 +109,7 @@ public class GameWorld {
 			// Icicle has collided with player
 			else if (icicle.getRect().overlaps(player.getRect())) {
 				iter.remove();
+				player.isDying = true;
 				gameOver = true;
 			}
 		}

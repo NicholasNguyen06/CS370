@@ -52,7 +52,7 @@ public class GameRenderer {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	
 		
 		drawBackground(runtime);
-		drawPlayer();
+		drawPlayer(runtime);
 		drawIcicles();
 		drawSnowballs();
 		drawText();
@@ -74,9 +74,18 @@ public class GameRenderer {
 		batch.end();
 	}
 	
-	private void drawPlayer() {
+	private void drawPlayer(float runtime) {
 		batch.begin();
-		batch.draw(world.getPlayer().getCurrentFrame(), world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
+		if (world.getPlayer().isDying == false) {
+			batch.draw(world.getPlayer().getCurrentFrame(), world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
+		} else {
+			batch.draw(AssetLoader.playerDeath.getKeyFrame(runtime), world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
+			if (AssetLoader.playerDeath.isAnimationFinished(runtime)) {
+				Gdx.app.log("gamerenderer", "animation finished");
+				world.getPlayer().isAlive = false;
+				world.getPlayer().isDying = false;
+			}
+		}
 		batch.end();
 	}
 	

@@ -26,7 +26,9 @@ public class Player extends GameObject {
 	// Current frame of animation
 	private int currentFrame = 1;
 	private boolean isAnimating = false;
-	private boolean getNextFrame = false;
+	
+	public boolean isDying = false;
+	public boolean isAlive = true;
 	
 	public Player(float posX, float posY) {
 		position = new Vector2(posX, posY);
@@ -38,27 +40,26 @@ public class Player extends GameObject {
 	
 	@Override
 	public void update(float delta) {
-		super.update(delta);
-		rect.x = position.x;
-		rect.y = position.y;
+		if (isAlive && !isDying) {
+			super.update(delta);
+			rect.x = position.x;
+			rect.y = position.y;
+		}
 		fixPositionIfNeeded();
 		
-		if (isAnimating && getNextFrame) {
-			if (++currentFrame > 8) {
+		if (isAnimating && ++currentFrame > AssetLoader.playerMoveRight_frameC - 1) {
 				currentFrame = 1;
 				isAnimating = false;
-			}
-			getNextFrame = false;
-			
-		} else if (isAnimating && !getNextFrame) {
-			getNextFrame = true;
 		}
 	}
 	
 	// Move the player right, on screen tap
 	public void moveRight() {
-		velocity.add(150.0f, 0.0f);
-		isAnimating = true;
+		if (isAlive && !isDying) {
+			velocity.add(150.0f, 0.0f);
+			isAnimating = true;
+			currentFrame = 1;
+		}
 	}
 	
 	public Rectangle getRect() {
@@ -67,10 +68,9 @@ public class Player extends GameObject {
 	
 	public Sprite getCurrentFrame() {
 		if (isAnimating == true) {
-			Gdx.app.log("currentFrame", currentFrame + "");
-			return AssetLoader.playerMoveRight.createSprite("000" + currentFrame);
+			return AssetLoader.playerMoveRightFrame(currentFrame);
 		} else {
-			return AssetLoader.playerMoveRight.createSprite("0001");
+			return AssetLoader.playerMoveRightFrame(1);
 		}
 	}
 	
