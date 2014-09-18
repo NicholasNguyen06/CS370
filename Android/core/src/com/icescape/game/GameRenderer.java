@@ -45,6 +45,8 @@ public class GameRenderer {
 		shapeRenderer = new ShapeRenderer();
 		input = new InputManager();
 		font = new BitmapFont();
+		font.setScale(3);
+		font.setColor(Color.RED);
 	}
 	
 	public void render(float runtime) {
@@ -76,16 +78,11 @@ public class GameRenderer {
 	
 	private void drawPlayer(float runtime) {
 		batch.begin();
-		if (world.getPlayer().isDying == false) {
+		
+		if (world.getPlayer().isAlive == true) {
 			batch.draw(world.getPlayer().getCurrentFrame(), world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
-		} else {
-			batch.draw(AssetLoader.playerDeath.getKeyFrame(runtime), world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
-			if (AssetLoader.playerDeath.isAnimationFinished(runtime)) {
-				Gdx.app.log("gamerenderer", "animation finished");
-				world.getPlayer().isAlive = false;
-				world.getPlayer().isDying = false;
-			}
 		}
+		
 		batch.end();
 	}
 	

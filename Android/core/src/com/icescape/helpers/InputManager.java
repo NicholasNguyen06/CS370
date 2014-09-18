@@ -5,13 +5,21 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Orientation;
 import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.Input.Keys;
 
 public class InputManager implements InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		// TODO Auto-generated method stub
-		return false;
+		if (keycode == Keys.LEFT) {
+			
+		}
+			
+		else if (keycode == Keys.RIGHT) {
+			
+		}
+		
+		return true; // Input was processed
 	}
 
 	@Override

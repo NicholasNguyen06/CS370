@@ -20,12 +20,22 @@ public class AssetLoader {
 		return playerMoveRightFrames.get(index);
 	}
 	
-	public static int playerMoveRight_frameC = 20;
+	public static Sprite playerDeathFrame(int index) {
+		if (index < 1) {
+			Gdx.app.log("AssetLoader: playerDeathFrame", "sprites index under range");
+		} else if (index > playerDeath_frameC) {
+			Gdx.app.log("AssetLoader: playerDeathFrame", "sprites index over range");
+		}
+		
+		return playerDeathFrames.get(index);
+	}
+	
+	public static int playerMoveRight_frameC;
 	private static Array<Sprite> playerMoveRightFrames;
 	private static String playerMoveRight_atlasname = "anim/skiier/skiier_anim.atlas";
 	
-	public static Animation playerDeath;
-	private static int playerDeath_frameC = 20;
+	public static int playerDeath_frameC; // Play each frame twice to slow death anim. down
+	private static Array<Sprite> playerDeathFrames;
 	private static String playerDeath_atlasname = "anim/skiier/death.atlas";
 		
 	public static Sprite player;
@@ -39,8 +49,10 @@ public class AssetLoader {
 	
 	public static void load() {
 		playerMoveRightFrames = new TextureAtlas(Gdx.files.internal(playerMoveRight_atlasname)).createSprites();
+		playerMoveRight_frameC = playerMoveRightFrames.size;
 		
-		playerDeath = new Animation(0.5f, new TextureAtlas(Gdx.files.internal(playerDeath_atlasname)).createSprites(), Animation.PlayMode.NORMAL);
+		playerDeathFrames = new TextureAtlas(Gdx.files.internal(playerDeath_atlasname)).createSprites();
+		playerDeath_frameC = playerDeathFrames.size;
 		
 		player = new Sprite();
 		player.setRegion(new Texture(Gdx.files.internal(player_texture_name)));

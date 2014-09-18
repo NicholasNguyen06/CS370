@@ -26,6 +26,8 @@ public class Player extends GameObject {
 	// Current frame of animation
 	private int currentFrame = 1;
 	private boolean isAnimating = false;
+		
+	private int iciclesHitBy = 0;
 	
 	public boolean isDying = false;
 	public boolean isAlive = true;
@@ -47,11 +49,27 @@ public class Player extends GameObject {
 		}
 		fixPositionIfNeeded();
 		
-		if (isAnimating && ++currentFrame > AssetLoader.playerMoveRight_frameC - 1) {
+		if (isAnimating) {
+			if (isDying == true && ++currentFrame > AssetLoader.playerDeath_frameC - 1) {
+					isAlive = false;
+					isAnimating = false;
+					Gdx.app.log("Player", "Death animation finished");
+			}
+			
+			else if (isDying == false && ++currentFrame > AssetLoader.playerMoveRight_frameC - 1){
 				currentFrame = 1;
 				isAnimating = false;
+			}
 		}
 	}
+	
+	public void HitByIcicle() {
+		if (++iciclesHitBy >= 3) {
+			isDying = true;
+			isAnimating = true;
+		}
+	}
+		
 	
 	// Move the player right, on screen tap
 	public void moveRight() {
@@ -67,9 +85,18 @@ public class Player extends GameObject {
 	}
 	
 	public Sprite getCurrentFrame() {
-		if (isAnimating == true) {
-			return AssetLoader.playerMoveRightFrame(currentFrame);
-		} else {
+		// Player is dying, play death animation
+		if (isDying == true) {
+			return AssetLoader.playerDeathFrame(currentFrame);
+		}
+		
+		// Player is moving, play movement animation
+		else if (isAnimating == true) {
+			return AssetLoader.playerMoveRightFrame(currentFrame);	
+		} 
+		
+		// Player is standing still or moving left, show static frame
+		else {
 			return AssetLoader.playerMoveRightFrame(1);
 		}
 	}

@@ -70,6 +70,7 @@ public class GameWorld {
 		if (player.isAlive == false) {
 			Gdx.app.exit();
 		}
+		
 		updateIcicles(delta);
 		updateSnowballs(delta);
 	}
@@ -109,8 +110,7 @@ public class GameWorld {
 			// Icicle has collided with player
 			else if (icicle.getRect().overlaps(player.getRect())) {
 				iter.remove();
-				player.isDying = true;
-				gameOver = true;
+				player.HitByIcicle();
 			}
 		}
 	}
