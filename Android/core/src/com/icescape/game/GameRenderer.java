@@ -97,7 +97,7 @@ public class GameRenderer {
 			batch.draw(AssetLoader.icicle, icicle.getX(), icicle.getY(), icicle.width, icicle.height);
 			shapeRenderer.begin(ShapeType.Line);
 			shapeRenderer.setColor(Color.GREEN);
-			shapeRenderer.polygon(icicle.getBoundingBox().getVertices());
+			shapeRenderer.polygon(icicle.getBoundingTriangle().getVertices());
 			shapeRenderer.end();
 		}
 		batch.end();
