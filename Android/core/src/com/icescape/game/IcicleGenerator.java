@@ -17,11 +17,20 @@ import com.badlogic.gdx.math.MathUtils;
 
 public class IcicleGenerator {
 	
+	private static int[] icicleWidths  = {16, 32, 64};
+	private static int[] icicleHeights = {32, 32, 64};
 	public static Icicle spawnIcicle() {
 
+		// Determine height and width
+		int random = MathUtils.random(0, 2);
+		int width  = icicleWidths[random];
+		int height = icicleHeights[random];
+		
+		
 		// Create a new icicle, positioned somewhere between (0, screen_height) and (screen_width, screen_height)
-		int x = MathUtils.random(0, (int)Constants.SCREEN_WIDTH - Icicle.width);
-		int y = (int)Constants.SCREEN_HEIGHT - Icicle.height;
-		return new Icicle(x, y);
+		int x = MathUtils.random(0, (int)Constants.SCREEN_WIDTH - width);
+		int y = (int)Constants.SCREEN_HEIGHT - height;
+		
+		return new Icicle(x, y, width, height);
 	}
 }

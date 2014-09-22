@@ -77,13 +77,16 @@ public class GameRenderer {
 	}
 	
 	private void drawPlayer(float runtime) {
-		batch.begin();
 		
 		if (world.getPlayer().isAlive == true) {
-			batch.draw(world.getPlayer().getCurrentFrame(), world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
+			//batch.begin();
+			//batch.draw(world.getPlayer().getCurrentFrame(), world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
+			//batch.end();
+			shapeRenderer.begin(ShapeType.Line);
+			shapeRenderer.setColor(Color.RED);
+			shapeRenderer.rect(world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
+			shapeRenderer.end();
 		}
-		
-		batch.end();
 	}
 	
 	private void drawIcicles() {
@@ -91,7 +94,11 @@ public class GameRenderer {
 		Iterator<Icicle> iter = world.getIcicles().iterator();
 		while (iter.hasNext()) {
 			Icicle icicle = iter.next();
-			batch.draw(AssetLoader.icicle, icicle.getX(), icicle.getY(), Icicle.width, Icicle.height);
+			batch.draw(AssetLoader.icicle, icicle.getX(), icicle.getY(), icicle.width, icicle.height);
+			shapeRenderer.begin(ShapeType.Line);
+			shapeRenderer.setColor(Color.GREEN);
+			shapeRenderer.polygon(icicle.getBoundingBox().getVertices());
+			shapeRenderer.end();
 		}
 		batch.end();
 	}

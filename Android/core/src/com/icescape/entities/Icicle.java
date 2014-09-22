@@ -2,29 +2,29 @@ package com.icescape.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Rectangle;
-
+import com.badlogic.gdx.math.Polygon;
 
 public class Icicle extends GameObject {
 
-	// Width and height of all icicle objects
-	// Currently, icicles are rectangles for collisions,
-	// we will need to create a Triangle class to represent them more accurately.
-	public static int width = 64, height = 64;
+	// Width and height of this icicle object.
+	// Three different width/height combos defined in IcicleGenerator.java
+	public int width, height;
 	
 	// Rate of falling acceleration
 	private static int GRAV_ACCELERATION = -120;
 	
-	// Bounding box for collisions
-	private Rectangle rect;
+	// Bounding triangle for collisions
+	private Polygon boundingTriangle;
 	
 	// Initialize an icicle at (posX, posY)
-	public Icicle(int posX, int posY) {
+	public Icicle(int posX, int posY, int width, int height) {
 		position = new Vector2(posX, posY);
 		velocity = new Vector2(0, 0);
 		acceleration = new Vector2(0, GRAV_ACCELERATION);
+		this.width = width;
+		this.height = height;
 		
-		rect = new Rectangle(posX, posY, width, height);
+		boundingTriangle = new Polygon(calculateVerticies());
 		
 		//Gdx.app.log("Icicle", "constructed a new icicle with origin at: " + posX + ", " + posY);
 	}
@@ -32,11 +32,20 @@ public class Icicle extends GameObject {
 	@Override
 	public void update(float delta) {
 		super.update(delta);
-		rect.x = position.x;
-		rect.y = position.y;
+		boundingTriangle.setVertices(calculateVerticies());
 	}
 	
-	public Rectangle getRect() {
-		return rect;
+	public Polygon getBoundingTriangle() {
+		return boundingTriangle;
+	}
+	
+	private float[] calculateVerticies() {
+		float topLeftX, topLeftY, topRightX, topRightY, bottomMiddleX, bottomMiddleY;
+		topLeftX = position.x; topLeftY = position.y + height;
+		topRightX = position.x + width; topRightY = position.y + height;
+		bottomMiddleX = position.x + (width / 2); bottomMiddleY = position.y;
+		
+		float[] verticies = {topLeftX, topLeftY, topRightX, topRightY, bottomMiddleX, bottomMiddleY};
+		return verticies;
 	}
 }

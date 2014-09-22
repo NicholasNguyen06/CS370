@@ -2,6 +2,7 @@ package com.icescape.entities;
 
 import com.badlogic.gdx.math.Vector2;
 
+// TODO: add constructor that initializes each Vector2
 public abstract class GameObject {
 
 	protected Vector2 position, acceleration, velocity;

@@ -21,6 +21,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 public class GameWorld {
 
@@ -32,7 +35,7 @@ public class GameWorld {
 
 	private Array<Icicle> icicles;
 	private long lastIcicleTime;
-	private long icicleSpawnSpacing = 500000000;
+	private long icicleSpawnSpacing = 999999999; //500000000;
 
 	private int iciclesDodged = 0;
 	
@@ -43,7 +46,7 @@ public class GameWorld {
 		
 		icicles = new Array<Icicle>();
 		snowballs = new Array<Snowball>();
-
+		
 		lastIcicleTime = lastSnowballTime = TimeUtils.nanoTime();
 	}
 
@@ -108,9 +111,9 @@ public class GameWorld {
 			}
 
 			// Icicle has collided with player
-			else if (icicle.getRect().overlaps(player.getRect())) {
+			else if (intersects(player.getRect(), icicle.getBoundingTriangle())) {
 				iter.remove();
-				player.HitByIcicle();
+				//player.HitByIcicle();
 			}
 		}
 	}
@@ -130,5 +133,60 @@ public class GameWorld {
 				iter.remove();
 			}
 		}
+	}
+	
+	/*
+	 * Polygon must represent a 2-d triangle, such that:
+	 * 		(p.verticies[0], p.verticies[1]) == (topleftX, topleftY)
+	 * 		(p.verticies[2], p.verticies[3]) == (toprightX, toprightY)
+	 * 		(p.verticies[4], p.verticies[5]) == (bottomMidX, bottomMidY)
+	 * 
+	 * 		Only applicable to triangles representing falling icicles.
+	 *							_________
+	 *							\		/
+	 *							 \     /
+	 *							  \   /
+	 *							   \ /
+	 *								*
+	 */
+	private boolean intersects(Rectangle r, Polygon p) {
+		
+		float[] verticies = p.getVertices();
+		
+		Vector2 triangleTopLeft  = makePoint(verticies[0], verticies[1]);
+		Vector2 triangleTopRight = makePoint(verticies[2], verticies[3]);
+		Vector2 triangleBottom   = makePoint(verticies[4], verticies[5]);
+		
+		Vector2 rectBottomLeft  = makePoint(r.x, r.y);
+		Vector2 rectBottomRight = makePoint(r.x + r.width, r.y);
+		Vector2 rectTopLeft		= makePoint(r.x, r.y + r.height);
+		Vector2 rectTopRight    = makePoint(r.x + r.width, r.y + r.height);
+		
+		Vector2 garbage = new Vector2();
+		
+		// Make sure triangle's bottom is touching or beneath rect's top edge,
+		// triangle's left corner is touching or to the right of rect's left edge,
+		// and triangle's right corner is touching or to the left or rect's right edge.
+		if (triangleBottom.y   > rectTopLeft.y  || 
+			triangleTopLeft.x  > rectTopRight.x ||
+			triangleTopRight.x < rectTopLeft.x) return false;
+
+		// Check if the triangle has directly intersected the top edge of rect
+		if (triangleBottom.x < rectTopRight.x &&
+			triangleBottom.x > rectTopLeft.x) return true;
+		
+		// Check if triangle's left edge has crossed rect's top edge
+		if ( Intersector.intersectLines(triangleTopLeft, triangleBottom, rectTopLeft, rectTopRight, garbage) )
+			return true;
+		
+		// Check if triangle's right edge has croossed rect's top edge
+		if ( Intersector.intersectLines(triangleTopRight, triangleBottom, rectTopLeft, rectTopRight, garbage) )
+			return true;
+		
+		return false;
+	}
+	
+	private Vector2 makePoint(float x, float y) {
+		return new Vector2(x, y);
 	}
 }
