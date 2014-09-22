@@ -10,25 +10,29 @@
 package com.icescape.game;
 
 import com.icescape.helpers.AssetLoader;
+import com.icescape.helpers.InputManager;
+import com.icescape.helpers.ScreenManager;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
 public class MyGdxGame extends Game {
 
-	private GameScreen gameScreen;
+	private InputManager  inputManager;
+	private ScreenManager screenManager;
 	
 	@Override
 	public void create() {
-		gameScreen = new GameScreen();
+		inputManager = new InputManager(this);
+		screenManager = new ScreenManager();
+		
+		screenManager.screens.push(new GameScreen());
 		AssetLoader.load();
-		startGame();
+		updateScreen();
 	}
 	
-	public void startGame() {
-		gameScreen.dispose();
-		gameScreen = new GameScreen();
-		setScreen(gameScreen);
+	public void updateScreen() {
+		setScreen(screenManager.screens.peek());
 	}
 	
 	@Override

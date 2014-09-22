@@ -40,6 +40,7 @@ public class GameWorld {
 	private int iciclesDodged = 0;
 	
 	private boolean gameOver = false;
+	private boolean isPaused = false;
 
 	public GameWorld() {
 		player = new Player(0, Constants.BACKGROUND_LAKE_HEIGHT);
@@ -49,33 +50,47 @@ public class GameWorld {
 		
 		lastIcicleTime = lastSnowballTime = TimeUtils.nanoTime();
 	}
-
+	
+	public void pause() {
+		isPaused = true;
+	}
+	
+	public void resume() {
+		isPaused = false;
+	}
+	
+	public boolean isPaused() {
+		return isPaused;
+	}
+	
 	public void update(float delta) {
-		
-		// Generate a new icicle if necessary
-		if (TimeUtils.nanoTime() - lastIcicleTime > icicleSpawnSpacing) {
-			icicles.add(IcicleGenerator.spawnIcicle());
-			lastIcicleTime = TimeUtils.nanoTime();
-		}
+		if (isPaused == false) {
 
-		// Throw a new snowball if necessary
-		if (TimeUtils.nanoTime() - lastSnowballTime > snowballSpawnSpacing) {
-			snowballs.add(SnowballGenerator.spawnSnowball());
-			lastSnowballTime = TimeUtils.nanoTime();
+			// Generate a new icicle if necessary
+			if (TimeUtils.nanoTime() - lastIcicleTime > icicleSpawnSpacing) {
+				icicles.add(IcicleGenerator.spawnIcicle());
+				lastIcicleTime = TimeUtils.nanoTime();
+			}
+	
+			// Throw a new snowball if necessary
+			if (TimeUtils.nanoTime() - lastSnowballTime > snowballSpawnSpacing) {
+				snowballs.add(SnowballGenerator.spawnSnowball());
+				lastSnowballTime = TimeUtils.nanoTime();
+			}
+			
+			// If the screen was tapped, update the player
+			if (Gdx.input.justTouched()) {
+				player.moveRight();
+			}
+	
+			player.update(delta);
+			if (player.isAlive == false) {
+				Gdx.app.exit();
+			}
+			
+			updateIcicles(delta);
+			updateSnowballs(delta);
 		}
-		
-		// If the screen was tapped, update the player
-		if (Gdx.input.justTouched()) {
-			player.moveRight();
-		}
-
-		player.update(delta);
-		if (player.isAlive == false) {
-			Gdx.app.exit();
-		}
-		
-		updateIcicles(delta);
-		updateSnowballs(delta);
 	}
 	
 	public boolean gameIsOver() {
@@ -157,12 +172,10 @@ public class GameWorld {
 		Vector2 triangleTopRight = makePoint(verticies[2], verticies[3]);
 		Vector2 triangleBottom   = makePoint(verticies[4], verticies[5]);
 		
-		Vector2 rectBottomLeft  = makePoint(r.x, r.y);
-		Vector2 rectBottomRight = makePoint(r.x + r.width, r.y);
+		//Vector2 rectBottomLeft  = makePoint(r.x, r.y);
+		//Vector2 rectBottomRight = makePoint(r.x + r.width, r.y);
 		Vector2 rectTopLeft		= makePoint(r.x, r.y + r.height);
 		Vector2 rectTopRight    = makePoint(r.x + r.width, r.y + r.height);
-		
-		Vector2 garbage = new Vector2();
 		
 		// Make sure triangle's bottom is touching or beneath rect's top edge,
 		// triangle's left corner is touching or to the right of rect's left edge,
@@ -174,6 +187,8 @@ public class GameWorld {
 		// Check if the triangle has directly intersected the top edge of rect
 		if (triangleBottom.x < rectTopRight.x &&
 			triangleBottom.x > rectTopLeft.x) return true;
+		
+		Vector2 garbage = new Vector2();
 		
 		// Check if triangle's left edge has crossed rect's top edge
 		if ( Intersector.intersectLines(triangleTopLeft, triangleBottom, rectTopLeft, rectTopRight, garbage) )

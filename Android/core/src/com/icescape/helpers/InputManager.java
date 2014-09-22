@@ -1,5 +1,7 @@
 package com.icescape.helpers;
 
+import com.icescape.game.MyGdxGame;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Orientation;
@@ -8,13 +10,18 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.Input.Keys;
 
 public class InputManager implements InputProcessor {
-
+	MyGdxGame game;
+	
+	public InputManager(MyGdxGame g) {
+		this.game = g;
+	}
+	
 	@Override
 	public boolean keyDown(int keycode) {
 		if (keycode == Keys.LEFT) {
 			
 		}
-			
+		
 		else if (keycode == Keys.RIGHT) {
 			
 		}

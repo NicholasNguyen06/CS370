@@ -32,7 +32,6 @@ public class GameRenderer {
 	private GameWorld world;
 	private ShapeRenderer shapeRenderer;
 	
-	private InputManager input;
 	private BitmapFont font;
 	
 	public GameRenderer(GameWorld world) {
@@ -43,7 +42,6 @@ public class GameRenderer {
 		
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
-		input = new InputManager();
 		font = new BitmapFont();
 		font.setScale(3);
 		font.setColor(Color.RED);
@@ -51,8 +49,7 @@ public class GameRenderer {
 	
 	public void render(float runtime) {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);	
-		
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		drawBackground(runtime);
 		drawPlayer(runtime);
 		drawIcicles();
@@ -62,7 +59,6 @@ public class GameRenderer {
 	
 	private void drawText() {
 		batch.begin();
-		font.drawMultiLine(batch,  input.getDeviceRotation(), 10, 500);
 		font.draw(batch, "" + world.getIciclesDodged(), 10, 300);
 		batch.end();
 	}
@@ -79,14 +75,15 @@ public class GameRenderer {
 	private void drawPlayer(float runtime) {
 		
 		if (world.getPlayer().isAlive == true) {
-			//batch.begin();
-			//batch.draw(world.getPlayer().getCurrentFrame(), world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
-			//batch.end();
-			shapeRenderer.begin(ShapeType.Line);
-			shapeRenderer.setColor(Color.RED);
-			shapeRenderer.rect(world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
-			shapeRenderer.end();
+			batch.begin();
+			batch.draw(world.getPlayer().getCurrentFrame(), world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
+			batch.end();
 		}
+		
+		shapeRenderer.begin(ShapeType.Line);
+		shapeRenderer.setColor(Color.RED);
+		shapeRenderer.rect(world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
+		shapeRenderer.end();
 	}
 	
 	private void drawIcicles() {
@@ -95,10 +92,6 @@ public class GameRenderer {
 		while (iter.hasNext()) {
 			Icicle icicle = iter.next();
 			batch.draw(AssetLoader.icicle, icicle.getX(), icicle.getY(), icicle.width, icicle.height);
-			shapeRenderer.begin(ShapeType.Line);
-			shapeRenderer.setColor(Color.GREEN);
-			shapeRenderer.polygon(icicle.getBoundingTriangle().getVertices());
-			shapeRenderer.end();
 		}
 		batch.end();
 	}

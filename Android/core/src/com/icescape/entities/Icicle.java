@@ -25,7 +25,6 @@ public class Icicle extends GameObject {
 		this.height = height;
 		
 		boundingTriangle = new Polygon(calculateVerticies());
-		
 		//Gdx.app.log("Icicle", "constructed a new icicle with origin at: " + posX + ", " + posY);
 	}
 	
