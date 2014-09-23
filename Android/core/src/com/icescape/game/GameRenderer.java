@@ -80,10 +80,11 @@ public class GameRenderer {
 			batch.end();
 		}
 		
-		shapeRenderer.begin(ShapeType.Line);
-		shapeRenderer.setColor(Color.RED);
-		shapeRenderer.rect(world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
-		shapeRenderer.end();
+		// Draw player's bounding box
+		//shapeRenderer.begin(ShapeType.Line);
+		//shapeRenderer.setColor(Color.RED);
+		//shapeRenderer.rect(world.getPlayer().getX(), world.getPlayer().getY(), Player.width, Player.height);
+		//shapeRenderer.end();
 	}
 	
 	private void drawIcicles() {

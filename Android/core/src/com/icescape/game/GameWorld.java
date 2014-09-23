@@ -87,7 +87,8 @@ public class GameWorld {
 	
 			player.update(delta);
 			if (player.isAlive == false) {
-				Gdx.app.exit();
+				gameOver = true;
+				
 			}
 			
 			updateIcicles(delta);

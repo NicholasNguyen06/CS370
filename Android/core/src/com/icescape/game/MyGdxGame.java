@@ -51,8 +51,9 @@ public class MyGdxGame extends Game {
 	
 	public void gameOver() {
 		screenManager.screens.pop();
-		// screenManager.screens.push(new GameOverScreen());
-		// updateScreen();
+		screenManager.screens.push(new GameScreen(this));
+		updateScreen();
+		Gdx.app.log("Game", "gameOver()");
 	}
 	
 	@Override
