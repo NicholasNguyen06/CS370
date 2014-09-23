@@ -10,5 +10,4 @@ public class ScreenManager {
 	public ScreenManager() {
 		screens = new Stack<AbstractScreen>();
 	}
-	
 }

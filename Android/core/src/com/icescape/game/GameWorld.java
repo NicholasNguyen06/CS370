@@ -16,6 +16,7 @@ import java.util.Iterator;
 
 import com.icescape.entities.*;
 import com.icescape.helpers.Constants;
+import com.icescape.helpers.SoundManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
@@ -128,6 +129,7 @@ public class GameWorld {
 			// Icicle has collided with player
 			else if (intersects(player.getRect(), icicle.getBoundingTriangle())) {
 				iter.remove();
+				SoundManager.play("icicle_hit_player");
 				//player.HitByIcicle();
 			}
 		}

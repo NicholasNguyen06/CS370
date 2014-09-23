@@ -32,14 +32,16 @@ public class GameScreen extends AbstractScreen {
 	private Sprite pauseSprite;
 	private Sprite playSprite;
 	
-	
 	private Skin pauseSkin;
 	private ButtonStyle pauseButtonStyle;
 	
 	private float runtime = 0;
 	private boolean isPaused = false;
 	
-	public GameScreen() {
+	private MyGdxGame game;
+	
+	public GameScreen(MyGdxGame game) {
+		this.game = game;
 		world = new GameWorld();
 		renderer = new GameRenderer(world);
 		
@@ -79,12 +81,12 @@ public class GameScreen extends AbstractScreen {
 		stage.addActor(pauseButton);
 	}
 	
-	public boolean gameIsOver() {
-		return world.gameIsOver();
-	}
-	
 	@Override
 	public void render(float delta) {
+		if(world.gameIsOver()) {
+			game.gameOver();
+		}
+		
 		if(isPaused == false) {
 			runtime += delta;
 			world.update(delta);
@@ -141,5 +143,4 @@ public class GameScreen extends AbstractScreen {
 		// TODO Auto-generated method stub
 		
 	}
-
 }
