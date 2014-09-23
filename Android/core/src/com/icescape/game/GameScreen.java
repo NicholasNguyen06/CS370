@@ -8,6 +8,7 @@ package com.icescape.game;
 import com.badlogic.gdx.Gdx;
 import com.icescape.game.AbstractScreen;
 import com.icescape.helpers.Constants;
+import com.icescape.helpers.SoundManager;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.Texture;
@@ -79,6 +80,8 @@ public class GameScreen extends AbstractScreen {
 		});
 		
 		stage.addActor(pauseButton);
+		
+		SoundManager.playBackground();
 	}
 	
 	@Override

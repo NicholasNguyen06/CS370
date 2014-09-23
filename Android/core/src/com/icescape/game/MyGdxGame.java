@@ -22,12 +22,22 @@ public class MyGdxGame extends Game {
 	
 	@Override
 	public void create() {
+		Gdx.app.log("Game", "Creating InputManager");
 		inputManager = new InputManager(this);
+		
+		Gdx.app.log("Game", "Creating ScreenManager");
 		screenManager = new ScreenManager();
 		
-		screenManager.screens.push(new GameScreen(this));
+		
+		Gdx.app.log("Game", "Loading assets");
 		AssetLoader.load();
+		
+		Gdx.app.log("Game", "Loading sounds");
 		SoundManager.load();
+		
+		Gdx.app.log("Game", "Creating GameScreen");
+		screenManager.screens.push(new GameScreen(this));
+	
 		updateScreen();
 	}
 	

@@ -82,6 +82,7 @@ public class GameWorld {
 			// If the screen was tapped, update the player
 			if (Gdx.input.justTouched()) {
 				player.moveRight();
+				SoundManager.playEffect("player_pole_swoosh");
 			}
 	
 			player.update(delta);
@@ -129,8 +130,8 @@ public class GameWorld {
 			// Icicle has collided with player
 			else if (intersects(player.getRect(), icicle.getBoundingTriangle())) {
 				iter.remove();
-				SoundManager.play("icicle_hit_player");
-				//player.HitByIcicle();
+				SoundManager.playEffect("icicle_hit_player");
+				player.HitByIcicle();
 			}
 		}
 	}
