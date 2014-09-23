@@ -131,12 +131,14 @@ public class GameScreen extends AbstractScreen {
 	@Override
 	public void pause() {
 		isPaused = true;
+		SoundManager.pauseBackground();
 		world.pause();
 	}
 
 	@Override
 	public void resume() {
 		isPaused = false;
+		SoundManager.playBackground();
 		world.resume();
 		
 	}

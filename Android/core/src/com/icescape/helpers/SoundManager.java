@@ -41,7 +41,11 @@ public class SoundManager {
 	}
 	
 	public static void playBackground() {
-		effects.get("skiing_background").loop(1.0f);
+		effects.get("skiing_background").loop();
+	}
+	
+	public static void pauseBackground() {
+		effects.get("skiing_background").pause();
 	}
 	
 	public static void load() {
